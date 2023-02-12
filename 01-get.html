@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <button>点击向服务端发送请求</button>
+    <div class="result"></div>
+    <script>
+        var btn = document.querySelector('button');
+        var result = document.querySelector('.result');
+        btn.onclick = function(){
+            // 创建对象
+            const xhr = new XMLHttpRequest();
+            // 给对象设置方法和url
+            xhr.open('GET','http://127.0.0.1:9000/service?a=200&b=200&c=200');
+            // 发送数据
+            xhr.send();
+            // readystate有五种状态分别从0到4
+            // 事件绑定
+            xhr.onreadystatechange = function(){
+                // 状态为4表明服务端返回了所有的结果
+                if (xhr.readyState===4) {
+                    // 判断如何拿到服务端返回的响应结果 通过响应状态吗决定
+                    if (xhr.status>=200&&xhr.status<300) {
+                        console.log(xhr.status); //状态码
+                        console.log(xhr.statusText); //状态字符串
+                        console.log(xhr.getAllResponseHeaders());
+                        console.log(xhr.response); //响应体
+                        result.innerHTML = xhr.response;
+                    }else {
+
+                    }
+                }
+            }
+            
+        }
+    </script>
+</body>
+</html>

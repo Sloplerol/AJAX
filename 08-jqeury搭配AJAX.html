@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+    <button class="btn">get post发送请求</button>
+    <button class="btn1">ajax发送请求</button>
+    <script>
+        $('.btn').click(function(){
+            $.get('http://127.0.0.1:9000/jquery-service',{a:29,b:29},function(data){
+                console.log(data);
+            },'json')
+        })
+        $('.btn1').click(function(){
+            // ajax着重于自定义化
+            $.ajax({
+                url: 'http://127.0.0.1:9000/ajax-service',
+                data: {a:11,b:40},
+                type: 'get',
+                dataType: 'json',
+                timeout: 2000,
+                // 在发送ajax请求时error既包含请求超时也包含了网络出错
+                error: function(){
+                    console.log('出错了');
+                },
+                success: function(data) {
+                    console.log(data);
+                }
+            })
+        })
+        // jquery搭配AJAX参数分别是(服务端url,发布的参数,回调函数,响应数据类型)
+    </script>
+</body>
+</html>

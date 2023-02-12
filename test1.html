@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.2/jquery.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <button>GET</button>
+    <button>POST</button>
+    <button>AJAX</button>
+    <script>
+        $('button').eq(0).click(function(){
+            $.get('http://127.0.0.1/get',{age:10,name:29},function(data){
+                console.log(data);
+            },'json');
+        })
+        $('button').eq(1).click(function(){
+            $.post('http://127.0.0.1/post',{age:100,name:200},function(){
+                console.log('world');
+            })
+        })
+        $('button').eq(2).click(function(){
+            $.ajax({
+                url: 'http://127.0.0.1/ajax',
+                data: {age:200,name:2313},
+                type: 'GET',
+                dataType: 'json',
+                success: function(data){
+                    console.log(data);
+                },
+                timeout: 2000,
+                error: function(){
+                    console.log('超时了...');
+                },
+                headers: {
+                    a:200,
+                    c:400
+                }
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn1">请求</button>
+    <button class="btn2">中断</button>
+    <script>
+        const btn1= document.querySelector('.btn1');
+        const btn2 = document.querySelector('.btn2');
+        let xhr = null;
+        btn1.onclick = function(){
+            // 外部想使用xhr一定要将不要在xhr前面加上加上声明符号
+            xhr = new XMLHttpRequest();
+            xhr.open('GET','http://127.0.0.1:9000/connect');
+            xhr.send();
+        }
+        //abort取消请求
+        btn2.onclick = function(){
+            xhr.abort();
+        }
+    </script>
+</body>
+</html>

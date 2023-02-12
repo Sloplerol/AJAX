@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        // 函数前端声明函数后端对实行对函数的调用
+        function getdata(obj) {
+            const box = document.querySelector('.box');
+            box.innerHTML = obj.name;
+        }
+    </script>
+    <!-- script实现了跨域的效果 -->
+    <!-- <script src="http://127.0.0.1:5500/regular.js"></script> -->
+    <script src="http://127.0.0.1:9000/jsonp-service"></script>
+    <!-- script返回结果必须是js代码 -->
+</body>
+
+</html>

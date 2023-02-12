@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        window.addEventListener('keyup',function(){
+            const box = document.querySelector('.box');
+            const xhr = new XMLHttpRequest();
+            xhr.responseType = 'json';
+            xhr.open('GET','http://127.0.0.1:9000/json-service');
+            xhr.send();
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState === 4) {
+                    if (xhr.status >=200 && xhr.status<300) {
+                        // console.log(xhr.response);
+                        // box.innerHTML = xhr.response;
+                        // 因为服务器返回结果是一个字符串我们需要手动转换将它转化为对象 利用JSON.parse
+                        // let result = JSON.parse(xhr.response);
+                        // console.log(result);
+                        // box.innerHTML = result.rname;
+                        // json将响应类型默认转化为了obj类型
+                        // console.log(xhr.response);
+                        box.innerHTML = xhr.response.rname;
+                        
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

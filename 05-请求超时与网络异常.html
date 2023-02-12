@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <button>点击</button>
+    <div class="box"></div>
+    <script>
+        const btn = document.querySelector('button');
+        const box = document.querySelector('.box');
+        btn.addEventListener('click',()=>{
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET','http://127.0.0.1:9000/delay');
+            // 当两秒后还没有返回结果将请求取消
+            xhr.timeout = 2000;
+            // 超时触发的回调函数
+            xhr.ontimeout = function(){
+                alert('超时了请稍后重试');
+            }
+            // 网络超时时触发的事件
+            xhr.onerror = function(){
+                alert('信号被小精灵干扰了')
+            }
+            xhr.send();
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState===4) {
+                    if (xhr.status>=200&&xhr.status<300) {
+                        box.innerHTML = xhr.response;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

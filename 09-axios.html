@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.js"></script>
+</head>
+
+<body>
+    <button>GET</button>
+    <button>POST</button>
+    <button>AJAX</button>
+    <script>
+        const btn = document.querySelectorAll('button');
+        // 外部配置url地址
+        axios.defaults.baseURL = 'http://127.0.0.1:9000';
+        // axios是基于promise的
+        btn[0].onclick = function () {
+            axios.get('/axios-service', {
+                // params代表url参数
+                params: {
+                    id: 292,
+                    vip: 12
+                },
+                headers: {
+                    age: 19,
+                    name: 29
+
+                }
+
+            }).then(val => {
+                // ajax有json的功能可以将转过来的对象型字符串转化为对象
+                console.log(val);
+            })
+
+        }
+        btn[1].onclick = function () {
+            // post参数依次是url 请求体 其他配置
+            axios.post('/axios-service', {
+                username: 'sada',
+                password: 'sadjja'
+                // 请求体发送的json格式的字符串
+            }, {
+                params: {
+                    id: 29,
+                    rname: 29
+                },
+                headers: {
+                    height: 29,
+                    weight: 20
+                }
+
+            })
+        }
+        btn[2].onclick = function(){
+            axios({
+                method: 'GET',
+                url: '/axios-service',
+                params: {
+                    id: 20,
+                    rname: 20
+                },
+                headers: {
+                    height: 40,
+                    weight: 29
+                },
+                data: {
+                    username: 'zjj',
+                    age: '18'
+                }
+
+            }).then(response=>{
+                console.log(response.status);
+                console.log(response.statusText);
+                console.log(response.headers);
+                console.log(response.data);
+            })
+        }
+    </script>
+</body>
+
+</html>
